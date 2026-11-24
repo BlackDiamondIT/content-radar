@@ -1,0 +1,57 @@
+# What the radar reads every morning. Edit freely; the next run picks it up.
+
+window_days = 30     # how far back it remembers
+track_min = 3        # keyword score (keywords.txt) needed to be tracked and shown
+max_tracked = 400    # most repos whose stars it checks per day
+stale_hours = 36     # `ask` warns if the last run is older than this
+
+# GitHub Trending pages (no API exists, so these are read as web pages).
+# The first one is the canary: if it returns under 10 repos the run is marked failed.
+# Swap or add a language page for your niche, e.g. https://github.com/trending/rust?since=daily
+trending = [
+  "https://github.com/trending?since=daily",
+  "https://github.com/trending/python?since=daily",
+  "https://github.com/trending/typescript?since=daily",
+]
+
+# GitHub Search queries. {d30} and {d7} become the date 30 and 7 days ago.
+# Replace the topic: words with your niche (look at the topic tags on repos you like).
+searches = [
+  "topic:claude-code created:>{d30} stars:>=40",
+  "topic:agent-skills created:>{d30} stars:>=40",
+  "topic:mcp created:>{d30} stars:>=40",
+  "\"alternative to\" AI in:description created:>{d30} stars:>=50",
+  "created:>{d7} stars:>=300",   # catch-all: anything new and popular; keywords.txt filters it
+]
+
+[hot]
+star_floor = 100         # a repo has a "hot day" if it gains this many stars in a day...
+star_frac = 0.01         # ...or 1% of its stars, whichever is bigger. Small niche? Try 30.
+mention_quiet_days = 7   # a newsletter mention counts if that newsletter was quiet about it for 7 days
+
+# Newsletters and feeds with public RSS. Only github.com links inside them are counted,
+# so pick feeds that link to repos. cadence_days = how often it normally publishes.
+[[feed]]
+id = "latent"
+url = "https://www.latent.space/feed"
+cadence_days = 1
+
+[[feed]]
+id = "simonw"
+url = "https://simonwillison.net/atom/everything/"
+cadence_days = 1
+
+[[feed]]
+id = "marktechpost"
+url = "https://www.marktechpost.com/feed"
+cadence_days = 1
+
+[[feed]]
+id = "trendsvc"
+url = "https://trends.vc/feed"
+cadence_days = 7
+
+[[feed]]
+id = "showhn"
+url = "https://news.ycombinator.com/showrss"
+cadence_days = 1

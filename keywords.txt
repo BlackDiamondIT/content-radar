@@ -1,0 +1,62 @@
+# Your niche filter. The radar scores every repo's name, description and topic tags against these words.
+# Header format: [name points cap]   points per matching word, cap = most points the group can give.
+# Score 3 or more = tracked and shown. 1-2 = shown only if it stays hot for days. 0 or less = ignored.
+# Plurals match automatically (skill matches skills). Lines starting with # are notes.
+# This example is set up for an AI / Claude-tools account. Replace the words with your own niche.
+
+[core 2 4]          # the words that ARE your niche
+claude
+claude-code
+anthropic
+skill
+mcp
+subagent
+plugin
+
+[outcome 2 4]       # what your audience wants to get: money, customers, jobs, time back
+customer
+lead
+sales
+marketing
+seo
+job
+resume
+study
+exam
+alternative to
+save
+
+[broad 1 1]         # loosely related; worth one point at most
+ai
+agent
+llm
+automation
+workflow
+
+[installable 0]     # 0 points: just a tag that tells Claude "people can install this"
+cli
+app
+extension
+template
+desktop
+
+[free 0]            # 0 points: tag only
+free
+open-source
+open source
+
+[avoid -2]          # too technical or off-niche for your audience
+kubernetes
+compiler
+database
+sdk
+benchmark
+dataset
+paper
+kernel
+
+[block]             # drop outright, no matter what else matches
+crypto
+airdrop
+crack
+keygen
